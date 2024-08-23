@@ -70,3 +70,5 @@ gem "bootstrap", "~> 5.3"
 gem "image_processing", "~> 1.13"
 
 gem "nokogiri", "~> 1.16"
+
+gem "sidekiq", "~> 7.3"
