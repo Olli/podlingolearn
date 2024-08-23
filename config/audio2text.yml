@@ -1,0 +1,4 @@
+development:
+  model: "ggml-tiny-q5_0.bin"
+production:
+  model: "ggml-large-v3.bin"

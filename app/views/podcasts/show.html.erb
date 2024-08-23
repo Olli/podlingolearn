@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+<div class="grid">
+  <%= render @podcast %>
+</div>
+<div class="row cols-3">
+  <%= render @podcast.episodes %>
+</div>
+<div class="btn-group" role="group" aria-label="Edit Podcast" >
+  <%= link_to "Edit this podcast", edit_podcast_path(@podcast), class:"btn btn-outline-primary" %>
+  <%= link_to "Back to podcasts", podcasts_path, class:"btn btn-outline-primary" %>
+  <%= link_to "Destroy this podcast", @podcast, method: :delete, class:"btn btn-outline-primary"%>
+</div>

@@ -1,0 +1,46 @@
+<div id="<%= dom_id podcast %>" class="card g-col-4">
+  <% if podcast.image.present? %>
+    <%= image_tag podcast.image.variant(:thumb), class: 'card-img-top' %>
+  <% end%>
+  <div class="card-body">
+    <h3 class="list-group-item card-title ">
+      <strong>Podcast:</strong>
+      <%= podcast.name %>
+    </h3>
+    <div class="card-text list-group">
+      <div class="list-group-item">
+        <strong>Url:</strong>
+        <%= podcast.url %>
+      </div>
+      <div class="list-group-item">
+        <strong>Xml url:</strong>
+        <%= podcast.xml_url %>
+      </div>
+      <div class="list-group-item">
+        <strong>Active:</strong>
+        <%= podcast.active %>
+      </div>
+      <div class="list-group-item">
+        <strong>Has youtube:</strong>
+        <%= podcast.has_youtube %>
+      </div>
+    </div>
+    <div class="btn-group my-2" role="group" aria-label="Edit Podcast" >
+      <%= link_to "Show Podcast",
+                   podcast, class:"btn btn-outline-primary" %>
+      <%= link_to "Edit this podcast",
+                   edit_podcast_path(podcast),
+                   class:"btn btn-outline-primary" %>
+      <%= link_to "Destroy this podcast",
+                  podcast, data: { turbo_method: :delete},
+                  class:"btn btn-outline-primary"%>
+    </div>
+    <%= turbo_frame_tag dom_id(podcast,'sync-link') do %>
+      <div class="btn-group my-2" role="group" aria-label="Edit Podcast" >
+        <%= link_to "Get New Episodes now", sync_episodes_now_podcast_path(podcast),
+            class:"btn btn-outline-primary",
+            data: { turbo_prefetch: false } %>
+      </div>
+    <% end %>
+  </div>
+</div>

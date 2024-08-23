@@ -1,0 +1,11 @@
+<% content_for :title, "New podcast" %>
+
+<h1>New podcast</h1>
+
+<%= render "form", podcast: @podcast %>
+
+<br>
+
+<div >
+  <%= link_to "Back to podcasts", podcasts_path, class: "btn btn-outline-primary" %>
+</div>

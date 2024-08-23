@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Episodes" %>
+
+<h1>Episodes</h1>
+
+<%= link_to "Back", podcasts_path , class: 'btn btn-primary' %>
+<div id="episodes">
+  <% @episodes.each do |episode| %>
+    <%= render episode %>
+  <% end %>
+</div>
+
+<%= link_to "Back", :back, class: 'btn btn-primary' %>

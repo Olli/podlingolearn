@@ -1,0 +1,7 @@
+<p style="color: green"><%= notice %></p>
+<% content_for :title, "Podcasts" %>
+<h1>Podcasts</h1>
+<div id="podcasts" class="grid">
+  <%= render @podcasts %>
+</div>
+<%= link_to "New podcast", new_podcast_path, class: 'btn btn-primary my-3' %>

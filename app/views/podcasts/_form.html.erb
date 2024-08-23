@@ -1,0 +1,42 @@
+<%= form_with(model: podcast) do |form| %>
+  <% if podcast.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(podcast.errors.count, "error") %> prohibited this podcast from being saved:</h2>
+
+      <ul>
+        <% podcast.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :url, class: "form-label" %>
+    <%= form.text_area :url, class: "form-control"  %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :xml_url, class: "form-label" %>
+    <%= form.text_area :xml_url, class: "form-control"  %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :active, class: "form-check-label" %>
+    <%= form.check_box :active, class: "form-check-input"  %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :has_youtube, class: "form-check-label" %>
+    <%= form.check_box :has_youtube, class: "form-check-input"  %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
