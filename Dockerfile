@@ -24,7 +24,8 @@ ENV RAILS_ENV="production" \
 
 # install python and git
 RUN apt update -qq && \
-    apt-get install --no-install-recommends -y python3 pip3
+    apt-get install --no-install-recommends -y python3 python3-pip
+RUN
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
