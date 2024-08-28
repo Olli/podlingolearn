@@ -11,6 +11,7 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Rails app lives here
 WORKDIR /rails
 
+
 # Install base packages
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libsqlite3-0 libvips libpq5  && \
@@ -44,11 +45,15 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+
 
 WORKDIR /rails/vendor/audio2text
 RUN /usr/bin/python3 -m venv /rails/vendor/audio2text/venv

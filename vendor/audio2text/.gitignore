@@ -1,0 +1,13 @@
+test/*
+!test/berliner.ogg
+!test/berliner.mp3
+!test/berliner.srt
+.env
+models/*.bin
+whispercpp
+tmp/*
+log.txt
+out
+output/*
+*.json
+*.csv
