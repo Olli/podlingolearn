@@ -24,7 +24,7 @@ ENV RAILS_ENV="production" \
 
 # install python and git
 RUN apt update -qq && \
-    apt-get install --no-install-recommends -y python3 python3-pip
+    apt-get install --no-install-recommends -y python3 python3-pip python3-venv
 RUN
 
 # Throw-away build stage to reduce size of final image
@@ -50,8 +50,12 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-WORKDIR /vendor/audio2text
-RUN pip3 install -r requirements.txt
+WORKDIR /rails/vendor/audio2text
+RUN /usr/bin/python3 -m venv /rails/vendor/audio2text/venv
+ENV PATH="/rails/vendor/audio2text/venv:$PATH"
+RUN . /rails/vendor/audio2text/venv/bin/activate
+RUN /rails/vendor/audio2text/venv/bin/pip install -U pip
+RUN /rails/vendor/audio2text/venv/bin/pip install -Ur /rails/vendor/audio2text/requirements.txt
 
 
 # Final stage for app image
