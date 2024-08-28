@@ -129,22 +129,22 @@ GEM
     ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (4.27.3)
+    google-protobuf (4.27.4)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.3-aarch64-linux)
+    google-protobuf (4.27.4-aarch64-linux)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.3-arm64-darwin)
+    google-protobuf (4.27.4-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.3-x86-linux)
+    google-protobuf (4.27.4-x86-linux)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.3-x86_64-darwin)
+    google-protobuf (4.27.4-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.3-x86_64-linux)
+    google-protobuf (4.27.4-x86_64-linux)
       bigdecimal
       rake (>= 13)
     httparty (0.22.0)
@@ -191,7 +191,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    net-imap (0.4.14)
+    net-imap (0.4.15)
       date
       net-protocol
     net-pop (0.1.2)
@@ -301,10 +301,10 @@ GEM
     rubocop-performance (1.21.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails (2.25.1)
+    rubocop-rails (2.26.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 1.33.0, < 2.0)
+      rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rails-omakase (1.0.0)
       rubocop
@@ -426,24 +426,24 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bootstrap (~> 5.3)
+  bootstrap
   brakeman
   capybara
   dartsass-rails
   debug
-  feedjira (~> 3.2)
-  httparty (~> 0.22.0)
-  image_processing (~> 1.13)
+  feedjira
+  httparty
+  image_processing
   importmap-rails
   jbuilder
-  nokogiri (~> 1.16)
+  nokogiri
   propshaft
   puma (>= 5.0)
-  rails (~> 7.2.0)
+  rails (~> 7.2.1)
   redis (>= 4.0.1)
   rubocop-rails-omakase
   selenium-webdriver
-  sidekiq (~> 7.3)
+  sidekiq
   solargraph
   sqlite3 (>= 1.4)
   stimulus-rails

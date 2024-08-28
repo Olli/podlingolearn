@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.0"
+gem "rails", "~> 7.2.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -60,15 +60,15 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "feedjira", "~> 3.2"
+gem "feedjira"
 
-gem "httparty", "~> 0.22.0"
+gem "httparty"
 
-gem "bootstrap", "~> 5.3"
+gem "bootstrap"
 
 
-gem "image_processing", "~> 1.13"
+gem "image_processing"
 
-gem "nokogiri", "~> 1.16"
+gem "nokogiri"
 
-gem "sidekiq", "~> 7.3"
+gem "sidekiq"
