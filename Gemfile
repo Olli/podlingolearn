@@ -68,7 +68,6 @@ gem "feedjira"
 
 gem "httparty"
 
-gem "bootstrap"
 
 
 gem "image_processing"
