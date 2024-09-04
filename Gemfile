@@ -77,14 +77,11 @@ gem "image_processing"
 
 gem "nokogiri"
 
-gem "sidekiq"
-
 gem "capistrano", "~> 3.19"
 gem "capistrano-rails", "~> 1.6"
 gem 'capistrano-rvm'
 gem 'capistrano-bundler', '~> 2.0'
 gem 'capistrano3-puma'
-gem 'capistrano-sidekiq'
 
 gem "ed25519", "~> 1.3"
 gem "bcrypt_pbkdf", "~> 1.1"
@@ -92,3 +89,5 @@ gem "bcrypt_pbkdf", "~> 1.1"
 
 
 gem "dotenv", "~> 3.1"
+
+gem "resque", "~> 2.6"
