@@ -1,0 +1,2 @@
+web: bin/rails server -e production
+resque: COUNT=2 bin/rake resque:workers
