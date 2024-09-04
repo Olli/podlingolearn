@@ -37,7 +37,9 @@ production:
   #host: <%= ENV['POSTGRES_HOST'] %>
   # database: path/to/persistent/storage/production.sqlite3
   adapter: mysql2
-  encoding: unicode
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+  reconnect: true
   pool: 5
   database: <%= ENV['MYSQL_DB'] %>
   username: <%= ENV['MYSQL_USER'] %>
