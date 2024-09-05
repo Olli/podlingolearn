@@ -27,14 +27,16 @@
       <%= link_to "Download Srt File", episode.srt_file, class: "btn btn-outline-primary" %>
     </div>
   <% end %>
-  <%= turbo_frame_tag dom_id(episode,'transcribe-link') do %>
-    <div class="list-group-item">
-      <%= link_to "Transcribe",
-                    transcribe_now_episode_path(episode),
-                    class: "btn btn-outline-primary",
-                    data: { turbo_prefetch: false }
+  <% unless episode.transcribed_at %>
+    <div class="list-group-item d-flex">
+      <%= turbo_frame_tag dom_id(episode,'transcribe-link') do %>
+        <%= link_to "Transcribe",
+                        transcribe_now_episode_path(episode),
+                        class: "btn btn-outline-primary",
+                        data: { turbo_prefetch: false }
 
-        %>
+            %>
+      <% end%>
     </div>
-  <% end%>
+  <% end %>
 </div>
