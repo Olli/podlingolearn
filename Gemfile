@@ -93,3 +93,5 @@ gem "dotenv"
 gem "solid_queue"
 
 gem "ostruct"
+
+gem "devise"
