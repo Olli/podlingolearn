@@ -1,4 +1,3 @@
-require 'resque/server'
 Rails.application.routes.draw do
   resources :episodes do
     member do
@@ -23,6 +22,5 @@ Rails.application.routes.draw do
   #get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  mount Resque::Server, at: '/resque'
   root "podcasts#index"
 end
