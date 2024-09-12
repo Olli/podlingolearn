@@ -1,4 +1,6 @@
 development:
   model: "ggml-tiny-q5_0.bin"
+  logfile: "log/audio2txt.log"
 production:
   model: "ggml-large-v3.bin"
+  logfile: "log/audio2txt.log"

@@ -25,15 +25,17 @@ class TranscribeJob < ApplicationJob
     def audio2text_process(tmpfile)
       Dir.chdir Rails.root + "vendor/audio2text"
       output_srt_tmp = Tempfile.new
-      #systemreturn = system("python -m venv .env ")
-      #systemreturn = system("source .env/bin/activate")
-      #systemreturn = system("./audio2text.py --model-path ../whisper.cpp/models/#{Rails.#configuration.audio2text['model']} -w ../whisper.cpp/main -i #{tmpfile.path} -o {output_srt_tmp.path} -of srt")
       exec_string = ".env/bin/python ./audio2text.py --model-path ../whisper.cpp/models/#{Rails.configuration.audio2text['model']} -w ../whisper.cpp/main -i #{tmpfile.path} -o #{output_srt_tmp.path} -of srt"
 
+      # adding a log if configured
+      if Rails.configuration.audio2text['logfile']
+        exec_string += " -lf #{Rails.root + Rails.configuration.audio2text['logfile']}"
+      end
       logger.debug(exec_string)
 
       systemreturn = system(exec_string)
 
       systemreturn ? output_srt_tmp : systemreturn
     end
+
 end
