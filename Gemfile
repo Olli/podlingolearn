@@ -83,11 +83,13 @@ gem 'capistrano-rvm'
 gem 'capistrano-bundler', '~> 2.0'
 gem 'capistrano3-puma'
 
-gem "ed25519", "~> 1.3"
-gem "bcrypt_pbkdf", "~> 1.1"
+gem "ed25519"
+gem "bcrypt_pbkdf"
 
 
 
-gem "dotenv", "~> 3.1"
+gem "dotenv"
 
-gem "resque", "~> 2.6"
+gem "solid_queue"
+
+gem "ostruct"
