@@ -10,8 +10,13 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: storage/development.sqlite3
+  primary:
+    <<: *default
+    database: storage/development.sqlite3
+  queue:
+    <<: *default
+    database: storage/development_queue.sqlite3
+    migrations_paths: db/queue_migrate
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -36,12 +41,17 @@ production:
   #password: <%= ENV['POSTGRES_PASSWD'] %>
   #host: <%= ENV['POSTGRES_HOST'] %>
   # database: path/to/persistent/storage/production.sqlite3
-  adapter: mysql2
-  encoding: utf8mb4
-  collation: utf8mb4_bin
-  reconnect: false
-  pool: 5
-  database: <%= ENV['MYSQL_DB'] %>
-  username: <%= ENV['MYSQL_USER'] %>
-  password: <%= ENV['MYSQL_PASSWD'] %>
-  host: <%= ENV['MYSQL_HOST'] %>
+  primary: &primary_production
+    adapter: mysql2
+    encoding: utf8mb4
+    collation: utf8mb4_bin
+    reconnect: false
+    pool: 5
+    database: <%= ENV['MYSQL_DB'] %>
+    username: <%= ENV['MYSQL_USER'] %>
+    password: <%= ENV['MYSQL_PASSWD'] %>
+    host: <%= ENV['MYSQL_HOST'] %>
+  queue:
+    <<: *primary_production
+    database: app_production_queue
+    migrations_paths: db/queue_migrate
