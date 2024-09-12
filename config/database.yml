@@ -53,5 +53,5 @@ production:
     host: <%= ENV['MYSQL_HOST'] %>
   queue:
     <<: *primary_production
-    database: app_production_queue
+    database: podcast_transcribe_production_queue
     migrations_paths: db/queue_migrate
