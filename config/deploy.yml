@@ -2,17 +2,17 @@
 service: podcast-transcribe
 
 # Name of the container image.
-image: webdesign-in-sachsen/podcast-transcribe
+image: beeindustries/podcast-transcribe
 
 # Deploy to these servers.
 servers:
   web:
     hosts:
       - imkermarkt.de
-  worker:
+  job:
     hosts:
       - imkermarkt.de
-    cmd: bundle exec sidekiq -q default
+    #cmd: bundle exec sidekiq -q default
 
 
 # Credentials for your image host.
@@ -21,9 +21,13 @@ registry:
   # server: registry.digitalocean.com / ghcr.io / ...
   username: beeindustries
 
+
   # Always use an access token rather than real password when possible.
   password:
     - KAMAL_REGISTRY_PASSWORD
+
+
+
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
@@ -63,9 +67,13 @@ builder:
 
 accessories:
   postgres:
-    image: postgres:16.0
-    host: imkermarkt.de
-    port: 5432
+    image: postgres:15.0
+    #host: imkermarkt.de
+    #host: localhost
+    #port: 5432
+    roles:
+      - web
+      - job
     env:
       clear:
         POSTGRES_USER: "podcast_transcribe"
@@ -83,13 +91,22 @@ accessories:
 
   redis:
     image: redis:7.2
-    host: imkermarkt.de
-    #roles:
-    #  - web
-    #  - job
+    #host: imkermarkt.de
+    #host: localhost
+    roles:
+      - web
+      - job
     cmd: "redis-server"
     directories:
       - data:/data
+
+traefik:
+  publish: false
+  args:
+    entryPoints.http.address: "127.0.0.1:3005"
+    entryPoints.http.forwardedHeaders.insecure: true
+    accesslog: true
+    accesslog.format: json
 
 
 
