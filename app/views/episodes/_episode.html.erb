@@ -20,7 +20,18 @@
     <% end %>
   </div>
   <div class="list-group-item d-flex">
-    <strong>Downloaded:</strong> <%= episode.audio_file.blank? ? "No" : "Yes" %>
+    <% if episode.audio_file.blank? %>
+      <%= turbo_frame_tag dom_id(episode,'download-episode') do %>
+        <%= link_to "Download Audio",
+          download_episode_episode_path(episode),
+          class: "btn btn-outline-primary",
+          data: { turbo_prefetch: false }
+
+        %>
+      <% end%>
+    <% else %>
+      <strong>Downloaded:</strong> Yes
+    <% end %>
   </div>
   <% if episode.srt_file.present? %>
     <div class="list-group-item d-flex">

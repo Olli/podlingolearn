@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   resources :episodes do
     member do
       get :transcribe_now
+      get :download_episode
     end
   end
 
   resources :podcasts do
     member do
-      get :sync_episodes_now
+      get :download_metadata_now
     end
   end
 

@@ -1,9 +1,9 @@
 class EpisodesController < ApplicationController
-  before_action :set_episode, only: %i[ show edit update destroy transcribe_now]
+  before_action :set_episode, only: %i[ show edit update destroy transcribe_now download_episode]
 
   # GET /episodes or /episodes.json
   def index
-    @episodes = Podcast.find(params[:podcast_id]).episodes
+    @episodes = Episode.where(podcast: params[:podcast_id]).order(published: :desc)
   end
 
   # GET /episodes/1 or /episodes/1.json
@@ -56,6 +56,11 @@ class EpisodesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def download_episode
+    GetEpisodeJob.perform_later(@episode)
+  end
+
 
   def transcribe_now
     TranscribeJob.perform_later(@episode)
