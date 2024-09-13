@@ -1,5 +1,5 @@
 class PodcastsController < ApplicationController
-  before_action :set_podcast, only: %i[ show edit update destroy sync_episodes_now ]
+  before_action :set_podcast, only: %i[ show edit update destroy download_metadata_now ]
 
   # GET /podcasts or /podcasts.json
   def index
@@ -57,8 +57,8 @@ class PodcastsController < ApplicationController
     end
   end
 
-  def sync_episodes_now
-    GetEpisodesJob.perform_later(@podcast.episodes.to_a)
+  def download_metadata_now
+    GetEpisodesJob.perform_later(@podcast.episodes)
   end
 
   private

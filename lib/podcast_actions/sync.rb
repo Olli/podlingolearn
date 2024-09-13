@@ -34,15 +34,13 @@ module PodcastActions
         end
       end
 
-      def sync_episodes(episodes)
+      def download_episode(episode)
         actions = self.new
-        episodes.each do |episode|
-          actions.sync_episode(episode)
-        end
+        actions.download_episode_audio(episode)
       end
     end
 
-    def sync_episode(episode, download_again = false)
+    def download_episode_audio(episode, download_again = false)
 
       audiofile_url = episode.url
 
