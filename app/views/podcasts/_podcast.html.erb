@@ -37,7 +37,7 @@
     </div>
     <%= turbo_frame_tag dom_id(podcast,'sync-link') do %>
       <div class="btn-group my-2" role="group" aria-label="Edit Podcast" >
-        <%= link_to "Get New Episodes now", sync_episodes_now_podcast_path(podcast),
+        <%= link_to "Sync Episode Metadata ", download_metadata_now_podcast_path(podcast),
             class:"btn btn-outline-primary",
             data: { turbo_prefetch: false } %>
       </div>
