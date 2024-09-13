@@ -19,7 +19,7 @@
       Yes (<time><%= l episode.transcribed_at, format: :short %></time>)
     <% end %>
   </div>
-  <div class="list-group-item d-flex">
+  <div class="list-group-item ">
     <% if episode.audio_file.blank? %>
       <%= turbo_frame_tag dom_id(episode,'download-episode') do %>
         <%= link_to "Download Audio",
@@ -30,7 +30,47 @@
         %>
       <% end%>
     <% else %>
-      <strong>Downloaded:</strong> Yes
+      <% if episode.audio_file.audio? %>
+        <ul>
+          <li>Sample Rate: <%= episode.audio_file.blob.metadata["sample_rate"] %>kHz</li>
+          <li>Bit Rate: <%= episode.audio_file.blob.metadata["bit_rate"] %>kbs</li>
+        </ul>
+
+
+        <media-player
+          view-type="audio"
+          stream-type="on-demand"
+          log-level="warn"
+          artist="<%= episode.podcast.name %>"
+          crossorigin
+          playsinline
+          duration="<%= episode.audio_file.blob.metadata["duration"] %>"
+          title="<%= episode.title%>"
+          poster="<%= rails_blob_url(episode.podcast.image.variant(:thumb).blob) %>"
+          src="<%= rails_blob_url(episode.audio_file.blob) %>"
+        >
+          <media-provider>
+
+          </media-provider>
+          <% if episode.transcribed_at %>
+            <media-provider>
+              <track
+                src="<%= rails_blob_url(episode.srt_file.blob)%>"
+                kind="subtitles"
+                label=""
+                srclang="cs"
+                default
+                data-type="srt"
+              />
+            </media-provider>
+          <% end%>
+
+          <media-audio-layout>
+          </media-audio-layout>
+          <media-captions class="vds-captions"></media-captions>
+
+        </media-player>
+      <% end%>
     <% end %>
   </div>
   <% if episode.srt_file.present? %>
