@@ -19,75 +19,38 @@
       Yes (<time><%= l episode.transcribed_at, format: :short %></time>)
     <% end %>
   </div>
-  <div class="list-group-item ">
-    <% if episode.audio_file.blank? %>
+
+  <div class="list-group-item btn-group" role="group">
+
+    <% if  episode.audio_file.blank? %>
       <%= turbo_frame_tag dom_id(episode,'download-episode') do %>
         <%= link_to "Download Audio",
-          download_episode_episode_path(episode),
-          class: "btn btn-outline-primary",
-          data: { turbo_prefetch: false }
-
+                    download_episode_episode_path(episode),
+                    class: "btn btn-outline-primary",
+                    data: { turbo_prefetch: false }
         %>
       <% end%>
-    <% else %>
-      <% if episode.audio_file.audio? %>
-        <ul>
-          <li>Sample Rate: <%= episode.audio_file.blob.metadata["sample_rate"] %>kHz</li>
-          <li>Bit Rate: <%= episode.audio_file.blob.metadata["bit_rate"] %>kbs</li>
-        </ul>
+    <% end%>
 
-
-        <media-player
-          view-type="audio"
-          stream-type="on-demand"
-          log-level="warn"
-          artist="<%= episode.podcast.name %>"
-          crossorigin
-          playsinline
-          duration="<%= episode.audio_file.blob.metadata["duration"] %>"
-          title="<%= episode.title%>"
-          poster="<%= rails_blob_url(episode.podcast.image.variant(:thumb).blob) %>"
-          src="<%= rails_blob_url(episode.audio_file.blob) %>"
-        >
-          <media-provider>
-
-          </media-provider>
-          <% if episode.transcribed_at %>
-            <media-provider>
-              <track
-                src="<%= rails_blob_url(episode.srt_file.blob)%>"
-                kind="subtitles"
-                label=""
-                srclang="cs"
-                default
-                data-type="srt"
-              />
-            </media-provider>
-          <% end%>
-
-          <media-audio-layout>
-          </media-audio-layout>
-          <media-captions class="vds-captions"></media-captions>
-
-        </media-player>
-      <% end%>
+    <% if episode.srt_file.present? %>
+      <%= link_to "Download Srt File",
+                  episode.srt_file,
+                  class: "btn btn-outline-primary" %>
     <% end %>
-  </div>
-  <% if episode.srt_file.present? %>
-    <div class="list-group-item d-flex">
-      <%= link_to "Download Srt File", episode.srt_file, class: "btn btn-outline-primary" %>
-    </div>
-  <% end %>
-  <% unless episode.transcribed_at %>
-    <div class="list-group-item d-flex">
+    <% unless episode.transcribed_at %>
       <%= turbo_frame_tag dom_id(episode,'transcribe-link') do %>
         <%= link_to "Transcribe",
-                        transcribe_now_episode_path(episode),
-                        class: "btn btn-outline-primary",
-                        data: { turbo_prefetch: false }
-
-            %>
+                    transcribe_now_episode_path(episode),
+                    class: "btn btn-outline-primary",
+                    data: { turbo_prefetch: false }%>
       <% end%>
-    </div>
-  <% end %>
+    <% end%>
+    <%= link_to "Show Details",
+                episode_path(episode),
+                class: "btn btn-primary" %>
+  </div>
+
+  <div class="list-group-item ">
+    <%= render partial: "episodes/episode_player", locals: { episode: episode } %>
+  </div>
 </div>
