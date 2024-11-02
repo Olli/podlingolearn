@@ -37,9 +37,13 @@
     </div>
     <%= turbo_frame_tag dom_id(podcast,'sync-link') do %>
       <div class="btn-group my-2" role="group" aria-label="Edit Podcast" >
-        <%= link_to "Sync Episode Metadata ", download_metadata_now_podcast_path(podcast),
-            class:"btn btn-outline-primary",
-            data: { turbo_prefetch: false } %>
+        <% link_message = @getting_episodes ? "Just downloading ..." : "Sync Episode Metadata" %>
+        <%= link_to link_message,
+                    download_metadata_now_podcast_path(podcast),
+                    class:"btn btn-outline-primary " + ("btn-disabled" || @getting_episodes),
+                    data: {
+                      turbo_prefetch: false
+                    } %>
       </div>
     <% end %>
   </div>

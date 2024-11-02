@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.1"
+gem "rails", "~> 7.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -48,7 +48,6 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
 end
 
 group :development do
@@ -79,9 +78,9 @@ gem "nokogiri"
 
 gem "capistrano", "~> 3.19"
 gem "capistrano-rails", "~> 1.6"
-gem 'capistrano-rvm'
-gem 'capistrano-bundler', '~> 2.0'
-gem 'capistrano3-puma'
+gem "capistrano-rvm"
+gem "capistrano-bundler", "~> 2.0"
+gem "capistrano3-puma"
 
 gem "ed25519"
 gem "bcrypt_pbkdf"

@@ -1,56 +1,83 @@
-<div id="<%= dom_id episode %>" class="list-group my-5 col">
-  <div class="list-group-item d-flex">
-    <strong>Title:</strong>
-    <%= episode.title %>
-  </div>
-  <div class="list-group-item  d-flex">
-    <strong>Url:</strong>
-    <%= episode.url %>
-  </div>
-  <div class="list-group-item  d-flex">
-    <strong>Is youtube:</strong>
-    <%= episode.is_youtube ? "Yes" : "No" %>
-  </div>
-  <div class="list-group-item d-flex">
-    <strong>Already transcribed:</strong>
-    <% if episode.srt_file.blank? %>
-      No
-    <% else %>
-      Yes (<time><%= l episode.transcribed_at, format: :short %></time>)
-    <% end %>
+<div class="accordion-item">
+
+  <div class="accordion-header">
+    <button class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#<%= dom_id episode %>-collapse"
+            aria-expanded="true"
+            aria-controls="<%= dom_id episode %>-collapse">
+
+          <%= episode.title %>
+          &nbsp;
+          <% if episode.srt_file.present? %>
+            <span class="badge text-bg-success">
+              Transcribed
+            </span>
+          <% end %>
+    </button>
+
   </div>
 
-  <div class="list-group-item btn-group" role="group">
 
-    <% if  episode.audio_file.blank? %>
-      <%= turbo_frame_tag dom_id(episode,'download-episode') do %>
-        <%= link_to "Download Audio",
-                    download_episode_episode_path(episode),
-                    class: "btn btn-outline-primary",
-                    data: { turbo_prefetch: false }
-        %>
-      <% end%>
-    <% end%>
+  <div id="<%= dom_id episode %>-collapse" class="accordion-collapse collapse">
 
-    <% if episode.srt_file.present? %>
-      <%= link_to "Download Srt File",
-                  episode.srt_file,
-                  class: "btn btn-outline-primary" %>
-    <% end %>
-    <% unless episode.transcribed_at %>
-      <%= turbo_frame_tag dom_id(episode,'transcribe-link') do %>
-        <%= link_to "Transcribe",
-                    transcribe_now_episode_path(episode),
-                    class: "btn btn-outline-primary",
-                    data: { turbo_prefetch: false }%>
-      <% end%>
-    <% end%>
-    <%= link_to "Show Details",
-                episode_path(episode),
-                class: "btn btn-primary" %>
-  </div>
+   <div class="accordion-body my-5 col grid" >
+      <div class="list-group g-col-md-5">
+        <div class="list-group-item  d-flex">
+          <%= link_to "Media Download", episode.url, class: 'btn btn-primary' %>
+        </div>
+        <div class="list-group-item  d-flex">
+          <strong>Is youtube:</strong>
+          <%= episode.is_youtube ? "Yes" : "No" %>
+        </div>
+        <% if episode.srt_file.present? %>
+          <div class="list-group-item">
+            <strong >Transcription Details</strong>
+            <p>Transcribed At: <time><%= l episode.transcribed_at, format: :short %></time></p>
 
-  <div class="list-group-item ">
-    <%= render partial: "episodes/episode_player", locals: { episode: episode } %>
+            <p>
+            <%= link_to "Download Srt File",
+                        episode.srt_file,
+                        class: "btn btn-outline-primary" %>
+            </p>
+
+          </div>
+        <% end %>
+        <% unless episode.transcribed_at %>
+          <div class="list-group-item">
+              <%= turbo_frame_tag dom_id(episode,'transcribe-link') do %>
+                <%= link_to "Transcribe",
+                            transcribe_now_episode_path(episode),
+                            class: "btn btn-outline-primary",
+                            data: { turbo_prefetch: false }%>
+              <% end%>
+          </div>
+        <% end%>
+        <div class="list-group-item btn-group" role="group">
+
+          <% if  episode.audio_file.blank? %>
+            <%= turbo_frame_tag dom_id(episode,'download-episode') do %>
+              <%= link_to "Download Audio",
+                          download_episode_episode_path(episode),
+                          class: "btn btn-outline-primary",
+                          data: { turbo_prefetch: false }
+              %>
+            <% end%>
+          <% end%>
+
+
+
+          <%= link_to "Show Details",
+                      episode_path(episode),
+                      class: "btn btn-primary" %>
+        </div>
+      </div>
+
+
+      <%= render partial: "episodes/episode_player", locals: { episode: episode } %>
+
+
+    </div>
   </div>
 </div>

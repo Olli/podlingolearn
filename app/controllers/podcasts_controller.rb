@@ -1,5 +1,6 @@
 class PodcastsController < ApplicationController
   before_action :set_podcast, only: %i[ show edit update destroy download_metadata_now ]
+  before_action :get_episodes_job_status, only: [ :index, :show ]
 
   # GET /podcasts or /podcasts.json
   def index
@@ -58,7 +59,11 @@ class PodcastsController < ApplicationController
   end
 
   def download_metadata_now
-    GetEpisodesJob.perform_later(@podcast.episodes)
+    @podcast.episodes do |episode|
+      GetEpisodeJob.perform_later(episode)
+    end
+    get_episodes_job_status
+
   end
 
   private
@@ -67,6 +72,9 @@ class PodcastsController < ApplicationController
       @podcast = Podcast.find(params[:id])
     end
 
+    def get_episodes_job_status
+      @getting_episodes = SolidQueue::Job.find_by(class_name: 'GetEpisodesJob', finished_at: nil).present?
+    end
     # Only allow a list of trusted parameters through.
     def podcast_params
       params.require(:podcast).permit(:name, :url, :xml_url, :active, :has_youtube)
