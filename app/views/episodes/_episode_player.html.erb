@@ -1,42 +1,47 @@
-    <% if episode.audio_file.present? and episode.audio_file.audio? %>
+<% if episode.audio_file.present? and episode.audio_file.audio? %>
+  <div class="media-player g-col-md-7">
+    <ul>
+      <li>
+        Sample Rate: <%= episode.audio_file.blob.metadata["sample_rate"] %>kHz
+      </li>
+      <li>
+        Bit Rate: <%= episode.audio_file.blob.metadata["bit_rate"] %>kbs
+      </li>
+      <li>
+        Duration: <%= Time.at(episode.audio_file.blob.metadata["duration"]).utc.strftime("%H:%M:%S") %>
+      </li>
+    </ul>
 
-        <ul>
-          <li>Sample Rate: <%= episode.audio_file.blob.metadata["sample_rate"] %>kHz</li>
-          <li>Bit Rate: <%= episode.audio_file.blob.metadata["bit_rate"] %>kbs</li>
-          <li>Duration: <%= Time.at(episode.audio_file.blob.metadata["duration"]).utc.strftime("%H:%M:%S") %>
-        </ul>
+    <media-player
+        view-type="audio"
+        stream-type="on-demand"
+        log-level="warn"
+        artist="<%= episode.podcast.name %>"
+        crossorigin
+        playsinline
+        duration="<%= episode.audio_file.blob.metadata["duration"] %>"
+        title="<%= episode.title%>"
+        poster="<%= rails_blob_url(episode.podcast.image.variant(:thumb).blob) %>"
+        src="<%= rails_blob_url(episode.audio_file.blob) %>"
+        storage="podcast-transcribe">
+      <media-provider>
 
+        <% if episode.transcribed_at %>
 
-        <media-player
-          view-type="audio"
-          stream-type="on-demand"
-          log-level="warn"
-          artist="<%= episode.podcast.name %>"
-          crossorigin
-          playsinline
-          duration="<%= episode.audio_file.blob.metadata["duration"] %>"
-          title="<%= episode.title%>"
-          poster="<%= rails_blob_url(episode.podcast.image.variant(:thumb).blob) %>"
-          src="<%= rails_blob_url(episode.audio_file.blob) %>"
-          storage="podcast-transcribe"
-        >
-          <media-provider>
+          <track src="<%= rails_blob_url(episode.srt_file.blob)%>"
+                kind="subtitles"
+                label="Czech"
+                srclang="cs"
+                default
+                data-type="srt">
+        </track>
+      <% end%>
+    </media-provider>
+    <media-captions class="vds-captions">
+    </media-captions>
+    <media-audio-layout color-scheme="dark" >
+    </media-audio-layout>
 
-            <% if episode.transcribed_at %>
-
-                <track
-                  src="<%= rails_blob_url(episode.srt_file.blob)%>"
-                  kind="subtitles"
-                  label="Czech"
-                  srclang="cs"
-                  default
-                  data-type="srt"
-                />
-            <% end%>
-          </media-provider>
-
-          <media-audio-layout></media-audio-layout>
-
-        </media-player>
-
-    <% end %>
+  </media-player>
+</div>
+<% end %>

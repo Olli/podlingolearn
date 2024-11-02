@@ -59,6 +59,21 @@ $enable-cssgrid: true;
 @import "vidstack/theme";
 @import "vidstack/audio";
 
+
+
+.accordion {
+  --bs-accordion-active-color: var(--bs-gray-100);
+  --bs-accordion-active-bg: var(--bs-gray-600);
+}
+
+.accordion-button::after {
+  background-color: #fff;
+  padding: 1rem;
+  background-position: center;
+  border-radius: 50%;
+
+}
+
 turbo-frame {
   display: contents;
 }
@@ -119,5 +134,9 @@ media-player[data-preview] media-captions {
 
 .plyr {
 --plyr-color-main: hsl(198, 100%, 50%);
+--plyr-video-controls-background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));
 /* CSS Vars: https://vidstack.io/docs/player/components/layouts/plyr-layout#css-variables */
+}
+.vds-audio-layout .vds-play-button {
+  --default-color: var(--default-brand);
 }

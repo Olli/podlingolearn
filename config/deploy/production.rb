@@ -7,8 +7,8 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server "imkermarkt.de", user: "podcast-transcribe",roles: %w{app db web}
-set :rvm_ruby_version, '3.3.5'
+server "imkermarkt.de", user: "podcast-transcribe", roles: %w[app db web]
+set :rvm_ruby_version, "3.3.5"
 set :puma_enable_socket_service, false
 
 # role-based syntax

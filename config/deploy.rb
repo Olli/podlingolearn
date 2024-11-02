@@ -21,11 +21,11 @@ set :deploy_to, "/home/podcast-transcribe/app/"
 # set :pty, true
 
 # Default value for :linked_files is []
-#append :linked_files, "config/database.yml", 'config/master.key'
-append :linked_files, 'config/master.key', '.env'
+# append :linked_files, "config/database.yml", 'config/master.key'
+append :linked_files, "config/master.key", ".env"
 
 # Default value for linked_dirs is []
-#append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
+# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "storage", "vendor/audio2text", "vendor/whisper.cpp"
 
 # Default value for default_env is {}
@@ -39,4 +39,3 @@ set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
-

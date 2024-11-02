@@ -19,7 +19,7 @@ module PodcastActions
             imagefile = uri.open
             image_mime = Mime::Type.lookup_by_extension(File.extname(content.image.url).delete("."))
             imagefile_name = File.basename(content.image.url)
-            podcast.image.attach(io: imagefile,filename: imagefile_name,content_type: image_mime.to_s)
+            podcast.image.attach(io: imagefile, filename: imagefile_name, content_type: image_mime.to_s)
           end
 
           content.entries.each do |entry|
@@ -41,7 +41,6 @@ module PodcastActions
     end
 
     def download_episode_audio(episode, download_again = false)
-
       audiofile_url = episode.url
 
       valid_audio_format = get_content_type(audiofile_url)
@@ -60,14 +59,10 @@ module PodcastActions
 
     private
       def get_content_type(audiofile_url)
-        ext_name = File.extname(audiofile_url).delete('.')
+        ext_name = File.extname(audiofile_url).delete(".")
         return unless PERMIT_IMAGE_FORMAT.include?(ext_name)
 
         "audio/#{ext_name}"
       end
-
-
-
   end
-
 end
