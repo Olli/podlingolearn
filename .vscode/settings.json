@@ -1,0 +1,8 @@
+{
+    "html-css-class-completion.CSSLanguages": [
+        "css",
+        "sass",
+        "scss"
+    ],
+    "prettier.experimentalTernaries": false
+}
