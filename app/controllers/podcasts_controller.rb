@@ -63,7 +63,6 @@ class PodcastsController < ApplicationController
       GetEpisodeJob.perform_later(episode)
     end
     get_episodes_job_status
-
   end
 
   private
@@ -73,7 +72,7 @@ class PodcastsController < ApplicationController
     end
 
     def get_episodes_job_status
-      @getting_episodes = SolidQueue::Job.find_by(class_name: 'GetEpisodesJob', finished_at: nil).present?
+      @getting_episodes = SolidQueue::Job.find_by(class_name: "GetEpisodesJob", finished_at: nil).present?
     end
     # Only allow a list of trusted parameters through.
     def podcast_params
