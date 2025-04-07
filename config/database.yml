@@ -55,3 +55,7 @@ production:
     <<: *primary_production
     database: podcast_transcribe_production_queue
     migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_migrate
