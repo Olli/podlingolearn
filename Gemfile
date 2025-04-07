@@ -1,8 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2"
-gem "propshaft"
+gem "rails", "~> 8.0"
 gem "sqlite3"
 gem "mysql2"
 gem "puma"
