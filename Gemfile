@@ -51,10 +51,10 @@ gem "image_processing"
 
 gem "nokogiri"
 
-gem "capistrano", "~> 3.19"
-gem "capistrano-rails", "~> 1.6"
+gem "capistrano"
+gem "capistrano-rails"
 gem "capistrano-rvm"
-gem "capistrano-bundler", "~> 2.0"
+gem "capistrano-bundler"
 gem "capistrano3-puma"
 
 gem "ed25519"
