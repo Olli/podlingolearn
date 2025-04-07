@@ -3,4 +3,3 @@ import "@hotwired/turbo-rails"
 //import "popper"
 //import "@popperjs/core"
 import "bootstrap"
-
