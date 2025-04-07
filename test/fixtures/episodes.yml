@@ -2,10 +2,22 @@
 
 one:
   podcast_id: 1
-  url: MyText
+  url: http://example.com/episodes.rss
   is_youtube: false
+  is_soundcloud: true
+
 
 two:
-  podcast_id: 1
-  url: MyText
+  podcast_id: 2
+  url: http://example.com/episodes.rss
+  is_youtube: true
+  is_soundcloud: true
+
+three:
+  podcast_id: 3
+  url: http://example.com/episodes.rss
   is_youtube: false
+  is_soundcloud: false
+
+
+
