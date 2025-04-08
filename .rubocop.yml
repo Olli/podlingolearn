@@ -1,6 +1,14 @@
 # Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
-
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+# begin and end should be aligned
+Layout/BeginEndAlignment:
+  Enabled: true
+# only 80 chars width because it gives a one blink overview without
+# moving the head around
+Layout/LineLength:
+  Enabled: true
+  Max: 80
 # Overwrite or add rules to create your own house style
 #
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
