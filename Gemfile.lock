@@ -265,6 +265,11 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.4.0)
+    propshaft (1.1.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     psych (5.2.3)
       date
       stringio
@@ -496,6 +501,7 @@ DEPENDENCIES
   nokogiri
   ostruct
   pg
+  propshaft
   puma
   rails (~> 8.0)
   rubocop

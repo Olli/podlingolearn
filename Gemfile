@@ -10,7 +10,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "dartsass-rails"
 gem "jbuilder"
-
+gem "propshaft"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
