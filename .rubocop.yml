@@ -9,6 +9,11 @@ Layout/BeginEndAlignment:
 Layout/LineLength:
   Enabled: true
   Max: 80
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: normal
+Layout/IndentationWidth:
+  Enabled: true
 # Overwrite or add rules to create your own house style
 #
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
