@@ -1,15 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
-  url: MyText
-  xml_url: MyText
-  active: false
+  name: Podcast1
+  url: http://example1.com
+  xml_url: http://example1.com/episodes.rss
+  active: true
   has_youtube: false
-
 two:
-  name: MyString
-  url: MyText
-  xml_url: MyText
+  name: Podcast2
+  url: https://example2.com
+  xml_url: https://example2.com/episodes.rss
   active: false
   has_youtube: false
