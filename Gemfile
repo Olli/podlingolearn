@@ -72,3 +72,5 @@ gem "ostruct"
 gem "devise"
 
 gem "whispercpp", "~> 1.3"
+
+gem "streamio-ffmpeg", github: "mitene/streamio-ffmpeg"
