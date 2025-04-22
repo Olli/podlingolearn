@@ -1,0 +1,28 @@
+FROM ubuntu:22.04 AS build
+WORKDIR /app
+
+RUN apt-get update && \
+  apt-get install -y build-essential wget cmake git \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+RUN git clone https://github.com/ggml-org/whisper.cpp . --depth 1
+
+# RUN make base.en
+# RUN make tiny.en
+
+# RUN bash ./models/download-ggml-model.sh base.en
+# RUN bash ./models/download-ggml-model.sh tiny.en
+
+RUN make -j
+
+FROM ubuntu:22.04 AS runtime
+WORKDIR /
+
+RUN apt-get update && \
+  apt-get install -y curl ffmpeg libsdl2-dev wget cmake git \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+COPY --from=build /app /app
+#ENTRYPOINT [ "bash" ]
+ENTRYPOINT ["/app/build/bin/whisper-server", "--host","0.0.0.0","-l", "auto", "-m","/models/ggml-tiny.en.bin"]
+
