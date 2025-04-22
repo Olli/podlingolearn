@@ -5,7 +5,7 @@
 # docker run -d -p 80:80 -p 443:443 --name my-app -e RAILS_MASTER_KEY=<value from config/master.key> my-app
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.3.4
+ARG RUBY_VERSION=3.4.1
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -54,13 +54,6 @@ RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
-
-WORKDIR /rails/vendor/audio2text
-RUN /usr/bin/python3 -m venv /rails/vendor/audio2text/venv
-ENV PATH="/rails/vendor/audio2text/venv:$PATH"
-RUN . /rails/vendor/audio2text/venv/bin/activate
-RUN /rails/vendor/audio2text/venv/bin/pip install -U pip
-RUN /rails/vendor/audio2text/venv/bin/pip install -Ur /rails/vendor/audio2text/requirements.txt
 
 
 # Final stage for app image
