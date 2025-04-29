@@ -15,16 +15,21 @@ module Transcribe
       # end
     end
 
+    # runs the enabled plugin
+    # @params [File,:read]  takes the file which should be transcribed
     def transcribe(audiofile)
       # @plugin_registry.plugins.first.new
-      converted_audio = convert_audio(audiofile)
+      converted_audio = convert_audio(audiofile.to_path)
       run_plugin(converted_audio)
     end
 
     private
-    def convert_audio(audiofile)
+    # converts the audiofile to a wav if neccesary
+    # @params [String,:read] path to audiofile
+    # @returns [File] Fileobject tot he temporary audiofile
+    def convert_audio(audiofile_path)
       tmp_audio = Tempfile.new("audiotranscription")
-      audiofile = FFMPEG::Movie.new(audiofile)
+      audiofile = FFMPEG::Movie.new(audiofile_path)
       if audiofile.valid?
         # audio codec pcm_s16le
         # audio channels 2
