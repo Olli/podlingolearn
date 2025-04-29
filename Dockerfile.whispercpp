@@ -17,12 +17,13 @@ RUN make -j
 
 FROM ubuntu:22.04 AS runtime
 WORKDIR /
-
 RUN apt-get update && \
   apt-get install -y curl ffmpeg libsdl2-dev wget cmake git \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 COPY --from=build /app /app
+RUN echo "starting whispercpp-cli"
+CMD ["/app/build/bin/whisper-cli"]
 #ENTRYPOINT [ "bash" ]
-ENTRYPOINT ["/app/build/bin/whisper-server", "--host","0.0.0.0","-l", "auto", "-m","/models/ggml-base.en.bin"]
-
+#ENTRYPOINT ["/app/build/bin/whisper-server", "--host","0.0.0.0","-l", "auto", "-m","/models/ggml-base.en.bin"]
+#ENTRYPOINT ["/app/build/bin/whisper-cli"]
