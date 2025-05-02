@@ -1,0 +1,94 @@
+# Name of your application. Used to uniquely configure containers.
+service: podcast-transcribe
+# Name of the container image.
+image: beeindustries/podcast-transcribe
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - imkermarkt.de
+  job:
+    hosts:
+      - imkermarkt.de
+    #cmd: bundle exec sidekiq -q default
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: beeindustries
+  # Always use an access token rather than real password when possible.
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+env:
+  clear:
+    RAILS_ENV: production
+    RACK_ENV: production
+    APPLICATION_HOST: imkermarkt.de
+    RAILS_SERVE_STATIC_FILES: true
+  secret:
+    - RAILS_MASTER_KEY
+    - REDIS_URL
+    - SMTP_PASSWORD
+    - SMTP_PORT
+    - SMTP_SERVER
+    - SMTP_USERNAME
+ssh:
+  user: podcast-transcribe
+  keys_only: true
+  #log_level: debug
+  #keys: [ "~/.ssh/id_ed25519" ]
+# Configure builder setup.
+# builder:
+#   args:
+#     RUBY_VERSION: 3.2.0
+#   secrets:
+#     - GITHUB_TOKEN
+#   remote:
+#     arch: amd64
+#     host: ssh://app@192.168.0.1
+
+# Use accessory services (secrets come from .env).
+builder:
+  multiarch: false
+accessories:
+  postgres:
+    image: postgres:15.0
+    #host: imkermarkt.de
+    #host: localhost
+    #port: 5432
+    roles:
+      - web
+      - job
+    env:
+      clear:
+        POSTGRES_USER: "podcast_transcribe"
+        POSTGRES_DB: "podcast_transcribe_production"
+        POSTGRES_HOST: "podcast-transcribe-postgres"
+      secret:
+        - POSTGRES_PASSWORD
+    files:
+      - config/init.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data:/var/lib/postgresql/data
+    #options:
+    #  #Once added your DB_HOST will be myservice-postgres.
+    #  network: "private"
+  redis:
+    image: redis:7.2
+    #host: imkermarkt.de
+    #host: localhost
+    roles:
+      - web
+      - job
+    cmd: "redis-server"
+    directories:
+      - data:/data
+traefik:
+  publish: false
+  args:
+    entryPoints.http.address: "127.0.0.1:3005"
+    entryPoints.http.forwardedHeaders.insecure: true
+    accesslog: true
+    accesslog.format: json
