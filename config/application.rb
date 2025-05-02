@@ -23,6 +23,6 @@ module PodcastTranscribe
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.audio2text = config_for(:audio2text)
+    # config.speech2text = config_for(:speech2text)
   end
 end
