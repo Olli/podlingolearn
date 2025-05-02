@@ -28,7 +28,7 @@
 
         <% if episode.transcribed_at %>
 
-          <track src="<%= rails_blob_url(episode.srt_file.blob)%>"
+          <track src="<%= rails_blob_url(episode.subtitle_file.blob)%>"
                 kind="subtitles"
                 label="Czech"
                 srclang="cs"
