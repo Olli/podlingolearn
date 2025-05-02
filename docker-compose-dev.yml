@@ -4,10 +4,7 @@ services:
       dockerfile: "Dockerfile.whispercpp"
       context: .
     volumes:
-      #- ./storage/whisper/models:/models:Z
-      #- ./vendor/whisper.cpp/build/bin:/app/bin
-      #- ./vendor/docker:/app/build/bin
-      - whispercpp:/app
+      - whispercpp:/app:Z
   db:
     image: docker.io/postgres
     volumes:
@@ -23,7 +20,7 @@ services:
       - podcast_transcribe_network
   podcast-app:
     build:
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.dev
       context: .
     command: "./bin/rails server"
     environment:
@@ -35,7 +32,7 @@ services:
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
     volumes:
       - app-storage:/rails/storage
-      - whispercpp:/rails/vendor/whisper.cpp
+      - whispercpp:/rails/vendor/whisper.cpp:Z
     depends_on:
       - db
       - whispercpp
