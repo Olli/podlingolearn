@@ -1,61 +1,8 @@
-// Sassy
-$enable-grid-classes: false;
-$enable-cssgrid: true;
-
-@import "../../vendor/stylesheets/bootstrap/scss/mixins/banner";
-@include bsBanner("");
-
-// scss-docs-start import-stack
-// Configuration
-@import "../../vendor/stylesheets/bootstrap/scss/functions";
-@import "../../vendor/stylesheets/bootstrap/scss/variables";
-@import "../../vendor/stylesheets/bootstrap/scss/variables-dark";
-@import "../../vendor/stylesheets/bootstrap/scss/maps";
-@import "../../vendor/stylesheets/bootstrap/scss/mixins";
-@import "../../vendor/stylesheets/bootstrap/scss/utilities";
-
-// Layout & components
-@import "../../vendor/stylesheets/bootstrap/scss/root";
-@import "../../vendor/stylesheets/bootstrap/scss/reboot";
-@import "../../vendor/stylesheets/bootstrap/scss/type";
-@import "../../vendor/stylesheets/bootstrap/scss/images";
-@import "../../vendor/stylesheets/bootstrap/scss/containers";
-@import "../../vendor/stylesheets/bootstrap/scss/grid";
-@import "../../vendor/stylesheets/bootstrap/scss/tables";
-@import "../../vendor/stylesheets/bootstrap/scss/forms";
-@import "../../vendor/stylesheets/bootstrap/scss/buttons";
-@import "../../vendor/stylesheets/bootstrap/scss/transitions";
-@import "../../vendor/stylesheets/bootstrap/scss/dropdown";
-@import "../../vendor/stylesheets/bootstrap/scss/button-group";
-@import "../../vendor/stylesheets/bootstrap/scss/nav";
-@import "../../vendor/stylesheets/bootstrap/scss/navbar";
-@import "../../vendor/stylesheets/bootstrap/scss/card";
-@import "../../vendor/stylesheets/bootstrap/scss/accordion";
-@import "../../vendor/stylesheets/bootstrap/scss/breadcrumb";
-@import "../../vendor/stylesheets/bootstrap/scss/pagination";
-@import "../../vendor/stylesheets/bootstrap/scss/badge";
-@import "../../vendor/stylesheets/bootstrap/scss/alert";
-@import "../../vendor/stylesheets/bootstrap/scss/progress";
-@import "../../vendor/stylesheets/bootstrap/scss/list-group";
-@import "../../vendor/stylesheets/bootstrap/scss/close";
-@import "../../vendor/stylesheets/bootstrap/scss/toasts";
-@import "../../vendor/stylesheets/bootstrap/scss/modal";
-@import "../../vendor/stylesheets/bootstrap/scss/tooltip";
-@import "../../vendor/stylesheets/bootstrap/scss/popover";
-@import "../../vendor/stylesheets/bootstrap/scss/carousel";
-@import "../../vendor/stylesheets/bootstrap/scss/spinners";
-@import "../../vendor/stylesheets/bootstrap/scss/offcanvas";
-@import "../../vendor/stylesheets/bootstrap/scss/placeholders";
-
-// Helpers
-@import "../../vendor/stylesheets/bootstrap/scss/helpers";
-
-// Utilities
-@import "../../vendor/stylesheets/bootstrap/scss/utilities/api";
-// scss-docs-end import-stack
-
-//@import "../../vendor/stylesheets/bootstrap/scss";
-
+@use "../../vendor/stylesheets/bootstrap/scss/bootstrap" with ($enable-grid-classes: false,
+  $enable-cssgrid: true,
+  $primary: #000000,
+  $border-color-translucent: #000000,
+  $list-group-border-color: #000000);
 @import "vidstack/theme";
 @import "vidstack/audio";
 
