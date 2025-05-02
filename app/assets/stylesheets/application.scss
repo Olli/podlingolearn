@@ -5,8 +5,8 @@
   $list-group-border-color: #000000,
   $border-color: #000000);
 
-@import "vidstack/theme";
-@import "vidstack/audio";
+@use "vidstack/theme";
+@use "vidstack/audio";
 
 .accordion {
   --bs-accordion-active-color: var(--bs-gray-100);
