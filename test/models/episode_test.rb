@@ -35,10 +35,10 @@ class EpisodeTest < ActiveSupport::TestCase
   end
 
   test "should attach srt file" do
-    @episode.srt_file.attach(io: File.open(
+    @episode.subtitle_file.attach(io: File.open(
                              Rails.root
                                .join("test/fixtures/files/test_subtitle.srt")),
                              filename: "test_subtitle.srt")
-    assert @episode.srt_file.attached?
+    assert @episode.subtitle_file.attached?
   end
 end

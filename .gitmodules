@@ -1,3 +1,6 @@
 [submodule "vendor/stylesheets/bootstrap"]
 	path = vendor/stylesheets/bootstrap
 	url = https://github.com/twbs/bootstrap
+[submodule "vendor/whisper.cpp"]
+	path = vendor/whisper.cpp
+	url = https://github.com//ggml-org/whisper.cpp

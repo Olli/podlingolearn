@@ -10,7 +10,7 @@
 
           <%= episode.title %>
           &nbsp;
-          <% if episode.srt_file.present? %>
+          <% if episode.subtitle_file.present? %>
             <span class="badge text-bg-success">
               Transcribed
             </span>
@@ -31,14 +31,14 @@
           <strong>Is youtube:</strong>
           <%= episode.is_youtube ? "Yes" : "No" %>
         </div>
-        <% if episode.srt_file.present? %>
+        <% if episode.subtitle_file.present? %>
           <div class="list-group-item">
             <strong >Transcription Details</strong>
             <p>Transcribed At: <time><%= l episode.transcribed_at, format: :short %></time></p>
 
             <p>
             <%= link_to "Download Srt File",
-                        episode.srt_file,
+                        episode.subtitle_file,
                         class: "btn btn-outline-primary" %>
             </p>
 
