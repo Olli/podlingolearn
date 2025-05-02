@@ -5,7 +5,6 @@ $enable-cssgrid: true;
 @import "bootstrap/mixins/banner";
 @include bsBanner("");
 
-
 // scss-docs-start import-stack
 // Configuration
 @import "bootstrap/functions";
@@ -60,8 +59,6 @@ $enable-cssgrid: true;
 @import "vidstack/theme";
 @import "vidstack/audio";
 
-
-
 .accordion {
   --bs-accordion-active-color: var(--bs-gray-100);
   --bs-accordion-active-bg: var(--bs-gray-600);
@@ -72,7 +69,6 @@ $enable-cssgrid: true;
   padding: 1rem;
   background-position: center;
   border-radius: 50%;
-
 }
 
 turbo-frame {
@@ -112,32 +108,33 @@ media-player[data-preview] media-captions {
   opacity: 0;
 }
 
-
 .media-player[data-view-type="video"] {
   aspect-ratio: 16 / 9;
 }
 
 .media-player[data-view-type="audio"] {
-    aspect-ratio: 3/1;
+  aspect-ratio: 3/1;
 }
 
 .vds-video-layout {
---video-brand: hsl(0, 0%, 96%);
-/* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#video-layout  */
-/* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */
+  --video-brand: hsl(0, 0%, 96%);
+  /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#video-layout  */
+  /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */
 }
 
 .vds-audio-layout {
---audio-brand: hsl(0, 0%, 96%);
-/* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#audio-layout */
-/* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */
+  --audio-brand: hsl(0, 0%, 96%);
+  /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#audio-layout */
+  /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */
 }
 
 .plyr {
---plyr-color-main: hsl(198, 100%, 50%);
---plyr-video-controls-background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));
-/* CSS Vars: https://vidstack.io/docs/player/components/layouts/plyr-layout#css-variables */
+  --plyr-color-main: hsl(198, 100%, 50%);
+  --plyr-video-controls-background: linear-gradient(rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.75));
+  /* CSS Vars: https://vidstack.io/docs/player/components/layouts/plyr-layout#css-variables */
 }
+
 .vds-audio-layout .vds-play-button {
   --default-color: var(--default-brand);
 }
