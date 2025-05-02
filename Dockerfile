@@ -14,7 +14,7 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libsqlite3-0 libvips libpq5  && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libmariadb-dev libsqlite3-0 libvips libpq5  && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
@@ -26,7 +26,6 @@ ENV RAILS_ENV="production" \
 # install python and git
 RUN apt update -qq && \
     apt-get install --no-install-recommends -y python3 python3-pip python3-venv
-RUN
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
