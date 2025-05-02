@@ -1,20 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
 <div id="<%= dom_id @episode %>" class="list-group my-5 col">
-  <div class="list-group-item d-flex">
-    <strong>Title:</strong>
+  <h1 class="list-group-item d-flex">
     <%= @episode.title %>
-  </div>
-  <div class="list-group-item  d-flex">
-    <strong>Url:</strong>
+  </h1>
+  <h2 class="list-group-item d-flex">Podcast: <%= link_to @episode.podcast.name, @episode.podcast, title: t("back_to") %></h2>
+  <div class="list-group-item d-flex">
+    <strong>Url: </strong>
     <%= @episode.url %>
   </div>
-  <div class="list-group-item  d-flex">
-    <strong>Is youtube:</strong>
+  <div class="list-group-item d-flex">
+    <strong>Is youtube: </strong>
     <%= @episode.is_youtube ? "Yes" : "No" %>
   </div>
   <div class="list-group-item d-flex">
-    <strong>Already transcribed:</strong>
+    <strong>Already transcribed: </strong>
     <% if @episode.subtitle_file.blank? %>
       No
     <% else %>
@@ -26,43 +26,44 @@
     <% if @episode.audio_file.blank? %>
       <%= turbo_frame_tag dom_id(@episode,'download-episode') do %>
         <%= link_to "Download Audio",
-          download_episode_episode_path(episode),
-          class: "btn btn-outline-primary",
-          data: { turbo_prefetch: false }
-        %>
-      <% end%>
-    <% end%>
+                    download_episode_episode_path(@episode),
+                    class: "btn btn-outline-primary",
+                    data: {
+                      turbo_prefetch: false,
+                    } %>
+      <% end %>
+    <% end %>
 
     <% if @episode.subtitle_file.present? %>
-        <%= link_to "Download Srt File", @episode.subtitle_file, class: "btn btn-outline-primary" %>
+      <%= link_to "Download Srt File",
+                  @episode.subtitle_file,
+                  class: "btn btn-outline-primary" %>
     <% end %>
 
     <% unless @episode.transcribed_at %>
 
       <%= turbo_frame_tag dom_id(@episode,'transcribe-link') do %>
         <%= link_to "Transcribe",
-                        transcribe_now_episode_path(@episode),
-                        class: "btn btn-outline-primary",
-                        data: { turbo_prefetch: false }
-
-            %>
-      <% end%>
+                    transcribe_now_episode_path(@episode),
+                    class: "btn btn-outline-primary",
+                    data: {
+                      turbo_prefetch: false,
+                    } %>
+                  <% end %>
     <% end %>
   </div>
-  <div class="list-group-item ">
-    <%= render partial: "episodes/episode_player", locals: { episode: @episode } %>
-  </div>
 
-  <div class="btn-toolbar" role="group">
+  <div class="episode-buttons"role="group">
     <%= link_to "Edit this episode",
-                edit_episode_path(@episode),
-                class: "btn btn-outline-primary" %>
-    <%= link_to "Back to episodes",
-                episodes_path,
-                class: "btn btn-primary" %>
+    edit_episode_path(@episode),
+    class: "btn btn-outline-primary" %>
+    <%= link_to "Back to episodes", episodes_path, class: "btn btn-primary" %>
 
     <%= button_to "Destroy this episode",
-                  @episode,
-                  class: "btn btn-outline-danger",
-                  method: :delete %>
+    @episode,
+    class: "btn btn-outline-danger",
+    method: :delete %>
   </div>
+</div>
+ <%= render partial: "episodes/episode_player", locals: { episode: @episode } %>
+
