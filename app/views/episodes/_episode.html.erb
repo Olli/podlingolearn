@@ -17,22 +17,20 @@
         </div>
       <% end %>
 
-      <div class="list-group-item " role="group">
         <% if  episode.audio_file.blank? %>
           <%= turbo_frame_tag dom_id(episode,'download-episode') do %>
             <%= link_to "Download Audio",
             download_episode_episode_path(episode),
-            class: "btn btn-outline-primary",
+            class: " list-group-item list-group-item-action",
             data: {
               turbo_prefetch: false,
             } %>
           <% end %>
         <% end %>
 
-        <%= link_to "Study episode", episode_path(episode), class: "btn btn-primary" %>
+        <%= link_to "Study episode", episode_path(episode), class: " list-group-item list-group-item-action" %>
       </div>
 
-    </div>
   </div>
 
 </div>

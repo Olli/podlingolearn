@@ -1,28 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
-<div id="<%= dom_id @episode %>" class="list-group my-5 col">
   <h1 class="list-group-item d-flex">
     <%= @episode.title %>
   </h1>
   <h2 class="list-group-item d-flex">Podcast: <%= link_to @episode.podcast.name, @episode.podcast, title: t("back_to") %></h2>
-  <div class="list-group-item d-flex">
-    <strong>Url: </strong>
-    <%= @episode.url %>
-  </div>
-  <div class="list-group-item d-flex">
-    <strong>Is youtube: </strong>
-    <%= @episode.is_youtube ? "Yes" : "No" %>
-  </div>
-  <div class="list-group-item d-flex">
-    <strong>Already transcribed: </strong>
-    <% if @episode.subtitle_file.blank? %>
-      No
-    <% else %>
-      Yes (<time><%= l @episode.transcribed_at, format: :short %></time>)
-    <% end %>
+  <div id="<%= dom_id @episode %>" class="list-group my-5 col">
+    <div class="list-group-item d-flex">
+      <strong>Url: </strong>
+      <%= @episode.url %>
+    </div>
+    <div class="list-group-item d-flex">
+      <strong>Is youtube: </strong>
+      <%= @episode.is_youtube ? "Yes" : "No" %>
+    </div>
+    <div class="list-group-item d-flex">
+      <strong>Already transcribed: </strong>
+      <% if @episode.subtitle_file.blank? %>
+        No
+      <% else %>
+        Yes (<time><%= l @episode.transcribed_at, format: :short %></time>)
+      <% end %>
+    </div>
   </div>
 
-  <div class="list-group-item btn-group d-flex">
+  <div class="btn-group mt-1 mb-2 " role="group">
+
     <% if @episode.audio_file.blank? %>
       <%= turbo_frame_tag dom_id(@episode,'download-episode') do %>
         <%= link_to "Download Audio",
@@ -49,20 +51,22 @@
                     data: {
                       turbo_prefetch: false,
                     } %>
-                  <% end %>
+      <% end %>
     <% end %>
+
   </div>
-
-  <div class="episode-buttons"role="group">
+  <div class="episode-buttons btn-group mb-3" role="group">
     <%= link_to "Edit this episode",
-    edit_episode_path(@episode),
-    class: "btn btn-outline-primary" %>
-    <%= link_to "Back to episodes", episodes_path, class: "btn btn-primary" %>
+                edit_episode_path(@episode),
+                class: "btn btn-outline-primary" %>
+    <%= link_to "Back to episodes", 
+                episodes_path, 
+                class: "btn btn-primary" %>
 
-    <%= button_to "Destroy this episode",
-    @episode,
-    class: "btn btn-outline-danger",
-    method: :delete %>
+    <%= button_to "Delete this episode",
+                  @episode,
+                  class: "btn btn-outline-danger",
+                  method: :delete %>
   </div>
 </div>
  <%= render partial: "episodes/episode_player", locals: { episode: @episode } %>
