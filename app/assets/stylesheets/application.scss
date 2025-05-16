@@ -113,3 +113,8 @@ media-player[data-preview] media-captions {
     border-radius: var(--border-radius);
   }
 }
+
+.d-flex {
+  column-gap: var(--bs-flex-column-gap, 1rem);
+  row-gap: var(--bs-flex-row-gap, 1rem);
+}

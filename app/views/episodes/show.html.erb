@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="btn-group mt-1 mb-2 " role="group">
+  <div class="d-flex mt-1 mb-2"  role="group">
 
     <% if @episode.audio_file.blank? %>
       <%= turbo_frame_tag dom_id(@episode,'download-episode') do %>
@@ -54,11 +54,6 @@
       <% end %>
     <% end %>
 
-  </div>
-  <div class="episode-buttons btn-group mb-3" role="group">
-    <%= link_to "Edit this episode",
-                edit_episode_path(@episode),
-                class: "btn btn-outline-primary" %>
     <%= link_to "Back to episodes", 
                 episodes_path, 
                 class: "btn btn-primary" %>
